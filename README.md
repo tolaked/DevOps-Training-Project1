@@ -9,18 +9,20 @@
 # STEP 2
 
 - Installing MYSQL
-  _ run *sudo apt install mysql-server* to install sql server
-  _ run _sudo mysql_ to login to mysql console \* run **_ALTER USER 'root'@'localhost' IDENTIFIED WITH mysql_native_password BY 'PassWord.1';_** to set password for the root user using mysql*native_password as default authentication method. \* exit MYSQL shell with \_msql > exit*
-  _ run *sudo mysql_secure_installation* to start the interactive script running and follow prompt to validate password.
-  _ With the steps above MYSQL server should be installed and secured.
-  ![Step 2](step2.png)
+  - run _sudo apt install mysql-server_ to install sql server
+  - run _sudo mysql_ to login to mysql console
+  - run **_ALTER USER 'root'@'localhost' IDENTIFIED WITH mysql_native_password BY 'PassWord.1';_** to set password for the root user using mysql\*native_password as default authentication method.
+  - exit MYSQL shell with \_msql > exit\*
+  - run _sudo mysql_secure_installation_ to start the interactive script running and follow prompt to validate password.
+  - With the steps above MYSQL server should be installed and secured.
+    ![Step 2](step2.png)
 
 # STEP 3
 
 - Installing PHP
-  _ run *sudo apt install php libapache2-mod-php php-mysql* to install php, libapache2-mod-php, php-mysql at once.
-  _ run _php -v_ to confirm php is installed.
-  ![Step 3](step3.png)
+  - run _sudo apt install php libapache2-mod-php php-mysql_ to install php, libapache2-mod-php, php-mysql at once.
+  - run _php -v_ to confirm php is installed.
+    ![Step 3](step3.png)
 
 # STEP 4
 
