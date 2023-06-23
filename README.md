@@ -12,7 +12,7 @@
   - run _sudo apt install mysql-server_ to install sql server
   - run _sudo mysql_ to login to mysql console
   - run **_ALTER USER 'root'@'localhost' IDENTIFIED WITH mysql_native_password BY 'PassWord.1';_** to set password for the root user using mysql\*native_password as default authentication method.
-  - exit MYSQL shell with \_msql > exit\*
+  - exit MYSQL shell with \_msql > exit
   - run _sudo mysql_secure_installation_ to start the interactive script running and follow prompt to validate password.
   - With the steps above MYSQL server should be installed and secured.
     ![Step 2](step2.png)
