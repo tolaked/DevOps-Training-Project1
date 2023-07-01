@@ -4,7 +4,8 @@
 
 - Installing nginx web server
   - run _sudo apt update_ to update server's index package
-  - run _sudo apt install nginx_ to install nginx server
+  - run _sudo apt install apache2_ to install apache2
+    ![Step 1](step1.png)
 
 # STEP 2
 
@@ -26,39 +27,30 @@
 
 # STEP 4
 
-- Configuring nginxto use php processor
+- Creating a virtual host for your website using apache
 
-  - run _sudo mkdir /var/www/projectLEMP_ to create root web directory for your_domain.
-  - run _sudo chown -R $USER:$USER /var/www/projectLEMP_ to assign ownership of the directory with the $USER environment variable, which will reference your current system user.
-  - run _sudo nano /etc/nginx/sites-available/projectLEMP_ to open a configuration file in Nginx’s sites-available directory using your preferred command-line editor. Here, we’ll use nano.
-  - Add the snippet in the code block below in the file
-  - run _sudo ln -s /etc/nginx/sites-available/projectLEMP /etc/nginx/sites-enabled/_ to activate your configuration by linking to the config file from Nginx’s sites-enabled directory
-  - run _sudo unlink /etc/nginx/sites-enabled/default_ to disable default Nginx host that is currently configured to listen on our port(80).
-  - run _sudo systemctl reload nginx_ to apply changes.
+  - run _sudo mkdir /var/www/projectlamp_ to create a directory for projectlamp
+  - run _sudo chown -R $USER:$USER /var/www/projectlamp_ to assign ownership of the current system user.
+  - run _sudo vi /etc/apache2/sites-available/projectlamp.conf_ to create and open a new configuration file in Apache’s sites-available using vi. This command will create a blank file. Paste the snippet below. Hit escape, type wq to save and exit the file.
+  - run _sudo ls /etc/apache2/sites-available_ to view the new file in sites-available directory.
+  - run _sudo a2ensite projectlamp_ to use a2ensite to enable virtual host.
+  - run _sudo a2dissite 000-default_ to disable apache's default website(optional).
+  - run _sudo apache2ctl configtest_ to make sure your configuration file doesn’t contain syntax errors.
+  - run _sudo systemctl reload apache2_ reload Apache so these changes take effect.
+  - The new website is now active, but the web root /var/www/projectlamp is still empty. Create an index.html file in that location so that we can test that the virtual host works as expected:
+  - run _sudo echo 'Hello LAMP from hostname' $(curl -s http://169.254.169.254/latest/meta-data/public-hostname) 'with public IP' $(curl -s http://169.254.169.254/latest/meta-data/public-ipv4) > /var/www/projectlamp/index.html_
   - visit _http://<Public-IP-Address>:80_ in the browser to see the website.
 
     ```
-        server {
-        listen 80;
-        server_name projectLEMP www.projectLEMP;
-        root /var/www/projectLEMP;
+        <VirtualHost *:80>
+    ServerName projectlamp
+    ServerAlias www.projectlamp
+    ServerAdmin webmaster@localhost
+    DocumentRoot /var/www/projectlamp
+    ErrorLog ${APACHE_LOG_DIR}/error.log
+    CustomLog ${APACHE_LOG_DIR}/access.log combined
+        </VirtualHost>
 
-        index index.html index.htm index.php;
-
-        location / {
-            try_files $uri $uri/ =404;
-        }
-
-        location ~ \.php$ {
-            include snippets/fastcgi-php.conf;
-            fastcgi_pass unix:/var/run/php/php8.1-fpm.sock;
-        }
-
-        location ~ /\.ht {
-            deny all;
-        }
-
-    }
     ```
 
   ```
@@ -68,6 +60,8 @@
 ![Step 4](step4.png)
 
 # STEP 5
+
+-Enabling php on the website
 
 - If we want to serve index.php file as the root file, run _sudo vim /etc/apache2/mods-enabled/dir.conf_ and change the content to the snippet below. Save and close
 
